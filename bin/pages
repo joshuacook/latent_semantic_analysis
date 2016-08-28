@@ -1,0 +1,13 @@
+#!/bin/sh
+
+mongo=$(docker ps | grep mongodb | grep Up)
+if [ -z "$mongo" ]; 
+    then ./bin/start_db
+fi
+
+docker run -it \
+    -v $(pwd):/source \
+    --name miniconda \
+    --link mongodb:mongodb \
+    joshuacook/miniconda python src/pages.py "$1" "$2"
+docker rm miniconda

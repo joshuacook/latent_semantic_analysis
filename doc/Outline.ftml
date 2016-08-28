@@ -1,0 +1,438 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="expandedItems" content="mJb9koiF3b QJYlijYh- m1pxpTYnW m1NWojthZ XJU-soth- X1LfijF3Z Q1FzjsYhb Qkt_SAthW QJpnk1qhb Xy2zjoth- Qy6j2J5hW myGh3kc3b my9nh192Z Q1kQsiF2Z Xk0xIRYh- XkERL0tnb XJeov0K2W XkVHjoY2Z mkD_jiYhb Qy7FjoY2W X1lajsF2W Q1IRjjYhZ XJY1hiKhW" />
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <ul id="FoldingText">
+      <li id="mJb9koiF3b">
+        <p>Product Statement</p>
+        <ul>
+          <li id="X1Xxsst2Z">
+            <p>We seek a command line interface (CLI) that can be used to query a dataset consisiting of documents. Our underlying dataset against which we will be making queries are the pages comprising Wikipedia. A user will be able to use our command line tool to receive the $n$ pages in a particular subset of Wikipedia pages that most closely match a passed serch term.</p>
+          </li>
+        </ul>
+      </li>
+      <li id="QJYlijYh-">
+        <p>System Design</p>
+        <ul>
+          <li id="m1pxpTYnW">
+            <p>Minimal System</p>
+            <ul>
+              <li id="mk0gssF3W">
+                <p>Interface Components</p>
+                <ul>
+                  <li id="my7v0TKnZ">
+                    <p>Command Line Interface</p>
+                    <ul>
+                      <li id="m1NWojthZ">
+                        <p>Our system can receive basic commands at the command line such as</p>
+                        <ul>
+                          <li id="Xy8866K2b">
+                            <p>`download`</p>
+                          </li>
+                          <li id="m1c8aat3b">
+                            <p>`display`</p>
+                          </li>
+                          <li id="mJRLTTY2b">
+                            <p>`search`</p>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li id="m1eOATtnb">
+                    <p>Notebook</p>
+                    <ul>
+                      <li id="XJU-soth-">
+                        <p>Our system also offers a command line UI, a Notebook, where users can display entities currently loaded in our system. </p>
+                        <ul>
+                          <li id="QJ7PpaKnb">
+                            <p>Launched via `notebook`</p>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li id="X13bsoF2b">
+                    <p>Exposed API (no authentication)</p>
+                    <ul>
+                      <li id="XyILRatnW">
+                        <p>Our system offers an API through which it can be manipulated. Strictly speaking, both the CLI and the Notebook are using the API to perform system actions. That said, the system could also be directly manipulated via API calls from `curl`, Postman, or even a web-page. </p>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li id="X1LfijF3Z">
+                <p>Back-End Components</p>
+                <ul>
+                  <li id="QkYBJAY2b">
+                    <p>For portability, we have decided to use microservice containerization via the Docker toolset to design our system. Our system has three core components, each of which is the sole process running in a Docker Container. </p>
+                  </li>
+                  <li id="Q1FzjsYhb">
+                    <p>Request Handler</p>
+                    <ul>
+                      <li id="XJu_z0Knb">
+                        <p>Our request handler must perform three essential tasks:</p>
+                        <ul>
+                          <li id="mJb9MCtn-">
+                            <p>receive requests and use these to execute a predefined task</p>
+                          </li>
+                          <li id="mJXoMAtnW">
+                            <p>interact with a database storing information about our objects</p>
+                          </li>
+                          <li id="QyQ2zRY2W">
+                            <p>interact with the Wikipedia API to retrieve information for Categories and Pages</p>
+                          </li>
+                        </ul>
+                      </li>
+                      <li id="X1MzXRtnb">
+                        <p>We use the minimal Python web framework Flask to serve this purpose. </p>
+                      </li>
+                      <li id="Qkt_SAthW">
+                        <p>We build our application on top of this image using docker's build tools and including the libraries we require for our project.</p>
+                        <ul>
+                          <li id="myyuQAY2Z">
+                            <p>mongoengine</p>
+                          </li>
+                          <li id="XyYO70t2W">
+                            <p>nltk</p>
+                          </li>
+                          <li id="myoPQRFhZ">
+                            <p>scikit-learn</p>
+                          </li>
+                          <li id="QJpnk1qhb">
+                            <p>all libs</p>
+                            <ul>
+                              <li id="QkebaJ1q2Z">
+                                <p>from bs4 import BeautifulSoup</p>
+                              </li>
+                              <li id="QyWZTJy9hW">
+                                <p>from datetime import date</p>
+                              </li>
+                              <li id="XJfW61J9nW">
+                                <p>from feather import read_dataframe, write_dataframe</p>
+                              </li>
+                              <li id="XJmWTkyq3-">
+                                <p>from IPython import embed</p>
+                              </li>
+                              <li id="XyEWpJJ92b">
+                                <p>from json import dumps, loads</p>
+                              </li>
+                              <li id="X1rba1k93Z">
+                                <p>from mongoengine import DateTimeField, Document, IntField, StringField, register_connection</p>
+                              </li>
+                              <li id="QkUW6Jkc2-">
+                                <p>from nltk.stem import PorterStemmer</p>
+                              </li>
+                              <li id="QJwZ6J19hZ">
+                                <p>from numpy import append, arange, array, asarray, asmatrix, load, median, save</p>
+                              </li>
+                              <li id="Xyd-pJJq2Z">
+                                <p>from os import environ, system</p>
+                              </li>
+                              <li id="XJYb61J9nb">
+                                <p>from pandas import concat, DataFrame, Series, read_json, options</p>
+                              </li>
+                              <li id="Xy9Zay192W">
+                                <p>from re import compile, escape, sub</p>
+                              </li>
+                              <li id="QJj-ay19hW">
+                                <p>from requests import get</p>
+                              </li>
+                              <li id="QkhbTJ192-">
+                                <p>from sklearn import metrics</p>
+                              </li>
+                              <li id="mkabpJJq2b">
+                                <p>from sklearn.cluster import KMeans, MiniBatchKMeans</p>
+                              </li>
+                              <li id="QyAW6J15n-">
+                                <p>from sklearn.decomposition import TruncatedSVD</p>
+                              </li>
+                              <li id="QJ1lb6ky5h-">
+                                <p>from sklearn.feature_extraction.text import CountVectorizer</p>
+                              </li>
+                              <li id="QJelWpk1cnZ">
+                                <p>from sklearn.pipeline import make_pipeline</p>
+                              </li>
+                              <li id="mJWe-py15hW">
+                                <p>from sklearn.preprocessing import Normalizer</p>
+                              </li>
+                              <li id="mkzg-6kycnZ">
+                                <p>from string import digits, punctuation</p>
+                              </li>
+                              <li id="QJXgZa11q3-">
+                                <p>from sys import arg, exit, stdout</p>
+                              </li>
+                              <li id="X1Eg-p1kc3W">
+                                <p>from yaml import load</p>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li id="Xy2zjoth-">
+                    <p>Database</p>
+                    <ul>
+                      <li id="X1h-Q0Y2Z">
+                        <p>We use MongoDB and the [latest](https://hub.docker.com/_/mongo/) Mongo image on Docker Hub</p>
+                      </li>
+                      <li id="Qy6j2J5hW">
+                        <p>Mongo v MySQL</p>
+                        <ul>
+                          <li id="Q1Z5WZc3b">
+                            <p>no Migrations!!!</p>
+                          </li>
+                        </ul>
+                      </li>
+                      <li id="myGh3kc3b">
+                        <p>Mongo v PostgreSQL</p>
+                        <ul>
+                          <li id="Q1_9-W52b">
+                            <p>performance questions?</p>
+                          </li>
+                        </ul>
+                      </li>
+                      <li id="my9nh192Z">
+                        <p>Mongo v Pandas</p>
+                        <ul>
+                          <li id="Xkp9bWqnZ">
+                            <p>mongoengine v Pandas</p>
+                          </li>
+                        </ul>
+                      </li>
+                      <li id="mJ9q319hZ">
+                        <p>NoSQL and ORM</p>
+                      </li>
+                      <li id="m1NohJ5nZ">
+                        <p>mongoengine</p>
+                      </li>
+                    </ul>
+                  </li>
+                  <li id="Q1kQsiF2Z">
+                    <p>Data Volume (for persistence)</p>
+                    <ul>
+                      <li id="myeXHCFhb">
+                        <p>We use a Docker best practice for data persistence. We use a separate data volume for holding our database files. This way if the database image crashes we do not lose data. Rather it is held on a separate volume not running a process. Furthermore, docker-compose has tools that can handle the reaping of this container ensuring no loss of data. </p>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li id="XycW66K2Z">
+            <p>Scaled System</p>
+            <ul>
+              <li id="Qkkz6pY2Z">
+                <p>Though it is not built in the accompanying repository of code. We recommend the following for a scaling of our system. </p>
+              </li>
+              <li id="Xk0xIRYh-">
+                <p>We add two new System Components</p>
+                <ul>
+                  <li id="Qkig8CK2Z">
+                    <p>A Job Queue accompanied by a data volume</p>
+                  </li>
+                  <li id="QkgfURY3b">
+                    <p>A Job Handler also built using the Flask image. It receives all code responsible for executing jobs. </p>
+                  </li>
+                </ul>
+              </li>
+              <li id="XkERL0tnb">
+                <p>Modify the Request Handler</p>
+                <ul>
+                  <li id="XkMJwCY3b">
+                    <p> It is responsible for passing delayed jobs to the Job Queue.</p>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li id="mkrQjiY2-">
+            <p>Development Process</p>
+            <ul>
+              <li id="QkpmjsK2-">
+                <p>docker</p>
+                <ul>
+                  <li id="mJn_PRFhW">
+                    <p>build image</p>
+                    <ul>
+                      <li id="QkkYwAKnW">
+                        <p>the minimal image upon which we will run our system</p>
+                      </li>
+                      <li id="mJ15vAK2b">
+                        <p>may need to update during development</p>
+                      </li>
+                      <li id="XyF9PCY2Z">
+                        <p>think of this as replacing virtualenv</p>
+                      </li>
+                    </ul>
+                  </li>
+                  <li id="XJeov0K2W">
+                    <p>making code changes</p>
+                    <ul>
+                      <li id="myecsDCYnZ">
+                        <p>docker run -v $(pwd):/source --name miniconda joshuacook/miniconda python src/download.py $category</p>
+                      </li>
+                      <li id="mJW5jv0YhZ">
+                        <p>docker rm miniconda</p>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li id="XyQVisthZ">
+                <p>docker-compose</p>
+                <ul>
+                  <li id="Q1Mx_RYhW">
+                    <p>defines our environment</p>
+                  </li>
+                  <li id="QJOgdRYhb">
+                    <p>docker-compose.yml</p>
+                  </li>
+                </ul>
+              </li>
+              <li id="Q1LVojF2Z">
+                <p>Makefiles</p>
+                <ul>
+                  <li id="XJx6pRth-">
+                    <p>obscure commands, especially prepending docker</p>
+                  </li>
+                  <li id="m1GERCF2W">
+                    <p>run make commands instead</p>
+                  </li>
+                </ul>
+              </li>
+              <li id="my_NoiK3Z">
+                <p>IPython</p>
+                <ul>
+                  <li id="XkY4C0t2-">
+                    <p>interactive debugger</p>
+                  </li>
+                </ul>
+              </li>
+              <li id="XkhEjoFnZ">
+                <p>Jupyter</p>
+                <ul>
+                  <li id="X1pVCCFnZ">
+                    <p>used for developing algorithms</p>
+                  </li>
+                </ul>
+              </li>
+              <li id="myxrisKhZ">
+                <p>Mediawiki API</p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li id="XkVHjoY2Z">
+        <p>Workflows</p>
+        <ul>
+          <li id="mJtrjsYnb">
+            <p>Getting Articles</p>
+            <ul>
+              <li id="Q1xsDaQ53b">
+                <p>https://en.wikipedia.org/w/api.php?action=query&amp;prop=extracts&amp;explaintext&amp;titles=Stack%20Overflow&amp;exlimit=max</p>
+              </li>
+              <li id="XJMivTmc3W">
+                <p>https://en.wikipedia.org/w/api.php?action=mobileview&amp;prop=sections&amp;sections=all&amp;page=Stack%20Overflow</p>
+              </li>
+            </ul>
+          </li>
+          <li id="XkE8jsKh-">
+            <p>Searching Articles</p>
+          </li>
+          <li id="QytIijY2-">
+            <p>Displaying Articles</p>
+          </li>
+          <li id="QJfvjiK3-">
+            <p>Cleaning Data</p>
+          </li>
+          <li id="QJHDiiKnb">
+            <p>Clearing System</p>
+          </li>
+        </ul>
+      </li>
+      <li id="mkD_jiYhb">
+        <p>Data Structures</p>
+        <ul>
+          <li id="QyT_jjtnb">
+            <p>Category</p>
+          </li>
+          <li id="mJgYjiYh-">
+            <p>Article</p>
+          </li>
+          <li id="mJzFiiF2W">
+            <p>Query</p>
+          </li>
+        </ul>
+      </li>
+      <li id="Qy7FjoY2W">
+        <p>Algorithms</p>
+        <ul>
+          <li id="XkdYijK2Z">
+            <p>Latent Semantic Analysis</p>
+          </li>
+          <li id="QyCKjiF2W">
+            <p>K Nearest Neighbors</p>
+          </li>
+          <li id="QkX5ssK3-">
+            <p>Sparse Matrices</p>
+          </li>
+          <li id="X1RqoiK2-">
+            <p>Inverted Index</p>
+          </li>
+          <li id="mkQosjK3b">
+            <p>Cosine Similarity</p>
+          </li>
+          <li id="myLsjithW">
+            <p>Feature Hashing -&gt; XGBoost</p>
+          </li>
+          <li id="XJghjsY2W">
+            <p>TF-IDF Vectorizer</p>
+          </li>
+        </ul>
+      </li>
+      <li id="X1lajsF2W">
+        <p>Analysis</p>
+        <ul>
+          <li id="QkMpjsK2-">
+            <p>Timing of System</p>
+          </li>
+          <li id="mJh6siF3Z">
+            <p>Timing of Algorithm</p>
+          </li>
+          <li id="XkmCoiK3W">
+            <p>Scaling</p>
+          </li>
+        </ul>
+      </li>
+      <li id="Q1IRjjYhZ">
+        <p>Using Project</p>
+        <ul>
+          <li id="Qk3Coit3W">
+            <p>Installation</p>
+          </li>
+        </ul>
+      </li>
+      <li id="XJY1hiKhW">
+        <p>Next Steps</p>
+        <ul>
+          <li id="XJs1noK2W">
+            <p>Delayed Job System</p>
+          </li>
+          <li id="XJelhoFnW">
+            <p>Advanced Wiki Queries</p>
+          </li>
+          <li id="QkUg2iF2b">
+            <p>Tune Algorithms</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+</html>

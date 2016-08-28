@@ -1,0 +1,18 @@
+#!/bin/sh
+
+mongodata=$(docker ps -a | grep mongodata)
+if [ -z "$mongodata" ]; then
+    docker run -d \
+        -v /data/db \
+        --name mongodata \
+        tianon/true 
+fi
+
+mongodb=$(docker ps | grep mongodb)
+if [ -z "$mongodb" ]; then
+    docker run -d \
+        --volumes-from mongodata \
+        --name mongodb \
+        --entrypoint mongod \
+        mongo 
+fi
