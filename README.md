@@ -9,7 +9,7 @@ Our system is portable, built upon a series of Docker containers:
 2. a Mongo DB container from the latest public `mongo` image
 3. a data container for Mongo DB from `tianon/true`
 
-![](https://dl.dropboxusercontent.com/u/407587/img/system.png)
+![](data/system.png)
 
 ## Installation
 
